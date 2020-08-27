@@ -27,7 +27,7 @@
 * create the api routes
 
 ## Database Models
-* Category
+* DONE Category
   - DONE id
     * DONE integer
     * DONE null vals not allowed
@@ -37,7 +37,7 @@
     * DONE string
     * DONE null vals not allowed
 
-* Product
+* DONE Product
   - DONE <code>id</code>
     * DONE integer
     * DONE null vals not allowed
@@ -59,14 +59,14 @@
     * DONE integer
     * DONE references the <code>category</code> model's DONE <code>id</code>
 
-* Tag
-  - <code>id</code>
-    * integer
-    * NOT NULL
-    * primary key
-    * auto increment
-  - <code>tag_name</code>
-    * string
+* DONE Tag
+  - DONE <code>id</code>
+    * DONE integer
+    * DONE NOT NULL
+    * DONE primary key
+    * DONE auto increment
+  - DONE <code>tag_name</code>
+    * DONE string
   
 * ProductTag
   - <code>id</code>
