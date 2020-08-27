@@ -41,6 +41,8 @@ router.post('/', async (req, res) => {
         category_name: req.body.category_name
       }
     );
+    //validation is being done at sequelize level
+    // length needs to be atleast 1 char for now
     res.json(data);
   } catch (err) {
     console.log(err);
@@ -50,10 +52,41 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   // update a category by its `id` value
+  try {
+    const data = await Category.update(
+      req.body,
+      {
+        individualHooks: true,
+        where: {
+          id: req.params.id
+        }
+      }
+    );
+    //validation is being done at sequelize level
+    // length needs to be atleast 1 char for now
+    res.json(data);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
+  try {
+    const data = await Category.destroy(
+      {
+        where: {
+          id: req.params.id
+        }
+      }
+    );
+    res.json(data);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+  
 });
 
 module.exports = router;
