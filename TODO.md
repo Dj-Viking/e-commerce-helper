@@ -68,18 +68,18 @@
   - DONE <code>tag_name</code>
     * DONE string
   
-* ProductTag
-  - <code>id</code>
-    * integer
-    * NOT NULL
-    * primary key
-    * auto increment
-  - <code>product_id</code>
-    * integer
-    * references <code>product</code> model's <code>id</code>
-  - <code>tag_id</code>
-    * integer
-    * references the <code>tag</code> model's <code>id</code>
+* DONE ProductTag
+  - DONE <code>id</code>
+    * DONE integer
+    * DONE NOT NULL
+    * DONE primary key
+    * DONE auto increment
+  - DONE <code>product_id</code>
+    * DONE integer
+    * DONE references <code>product</code> model's <code>id</code>
+  - DONE <code>tag_id</code>
+    * DONE integer
+    * DONE references the <code>tag</code> model's <code>id</code>
 
 ## Associations
 
