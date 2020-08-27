@@ -28,36 +28,36 @@
 
 ## Database Models
 * Category
-  - id
-    * integer
-    * null vals not allowed
-    * set as primary key
-    * uses auto_increment
-  - <code>category_name</code>
-    * string
-    * null vals not allowed
+  - DONE id
+    * DONE integer
+    * DONE null vals not allowed
+    * DONE set as primary key
+    * DONE uses auto_increment
+  - DONE <code>category_name</code>
+    * DONE string
+    * DONE null vals not allowed
 
 * Product
-  - <code>id</code>
-    * integer
-    * null vals not allowed
-    * primary key
-    * auto increment
-  - <code>product_name</code>
-    * string
-    * null vals not allowed
-  - <code>price</code>
-    * decimal
-    * NOT NULL
-    * valiates that the value is a decimal(?)
-  - <code>stock</code>
-    * Integer
-    * NOT NULL
-    * default value of 10
-    * validates that the value is numeric
-  - <code>category_id</code>
-    * integer
-    * references the <code>category</code> model's <code>id</code>
+  - DONE <code>id</code>
+    * DONE integer
+    * DONE null vals not allowed
+    * DONE primary key
+    * DONE auto increment
+  - DONE <code>product_name</code>
+    * DONE string
+    * DONE null vals not allowed
+  - DONE <code>price</code>
+    * DONE decimal
+    * DONE NOT NULL
+    * DONE valiates that the value is a decimal(?)
+  - DONE <code>stock</code>
+    * DONE Integer
+    * DONE NOT NULL
+    * DONE default value of 10
+    * DONE validates that the value is numeric
+  - DONE <code>category_id</code>
+    * DONE integer
+    * DONE references the <code>category</code> model's DONE <code>id</code>
 
 * Tag
   - <code>id</code>
