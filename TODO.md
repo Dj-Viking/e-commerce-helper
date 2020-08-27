@@ -57,7 +57,7 @@
     * DONE validates that the value is numeric
   - DONE <code>category_id</code>
     * DONE integer
-    * DONE references the <code>category</code> model's DONE <code>id</code>
+    * DONE references the <code>category</code> model's <code>id</code>
 
 * DONE Tag
   - DONE <code>id</code>
