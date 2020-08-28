@@ -78,8 +78,10 @@ router.put('/:id', async (req, res) => {
         }
       }
     );
-    //validation is being done at sequelize level
-    // length needs to be atleast 1 char for now
+    if (data[0] === 0 || !data) {
+      res.status(400).json({message: 'There was a problem with your request format.'});
+      return;
+    }
     res.json(data);
   } catch (err) {
     console.log(err);

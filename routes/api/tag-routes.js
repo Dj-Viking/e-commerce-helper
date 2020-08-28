@@ -63,27 +63,44 @@ router.post('/', async (req, res) => {
     res.json(data);
   } catch (err) {
     console.log(err);
-    res.status(500).json(err);
+    res.status(400).json(err);
   }
 });
 
 router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
+    /** body required for the tag post route
+   * {
+   *  "tag_name": "name"
+   * }
+   * i think..but lets try
+   */
   try {
-
+    const data = await Tag.update(
+      {
+        tag_name: req.body.tag_name
+      },
+      {
+        individualHooks: true,
+        where: {
+          id: req.params.id
+        }
+      }
+    );
+    res.json(data);
   } catch (err) {
     console.log(err);
-    res.status(500).json(err);
+    res.status(400).json(err);
   }
 });
 
 router.delete('/:id', async (req, res) => {
   // delete on tag by its `id` value
   try {
-
+    
   } catch (err) {
     console.log(err);
-    res.status(500).json(err);
+    res.status(400).json(err);
   }
 });
 
