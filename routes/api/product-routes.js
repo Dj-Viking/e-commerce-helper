@@ -9,6 +9,9 @@ router.get('/', async (req, res) => {
   
   `);
   console.log("\x1b[33m", "client request for all products", "\x1b[00m");
+  console.log(`
+  
+  `);
   // find all products
   // be sure to include its associated Category and Tag data
   try {
@@ -23,7 +26,8 @@ router.get('/', async (req, res) => {
       ]
     });
     //console.table(data[1]);
-    res.json(data);
+    res.header("Content-Type",'application/json');
+    res.send(JSON.stringify(data, null, 2));
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -36,6 +40,9 @@ router.get('/:id', async (req, res) => {
   
   `);
   console.log("\x1b[33m", "client request for one product by product id", "\x1b[00m");
+  console.log(`
+  
+  `);
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
   try {
@@ -55,7 +62,8 @@ router.get('/:id', async (req, res) => {
         ]
       }
     );
-    res.json(data);
+    res.header("Content-Type",'application/json');
+    res.send(JSON.stringify(data, null, 2));
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -68,6 +76,9 @@ router.post('/', (req, res) => {
   
   `);
   console.log("\x1b[33m", "client request to create a product", "\x1b[00m");
+  console.log(`
+  
+  `);
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -102,6 +113,13 @@ router.post('/', (req, res) => {
 
 // update product
 router.put('/:id', (req, res) => {
+  console.log(`
+  
+  `);
+  console.log("\x1b[33m", "client request to update a product by product id", "\x1b[00m");
+  console.log(`
+  
+  `);
   // update product data
     /* req.body should look like this...
     {
@@ -153,6 +171,13 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
+  console.log(`
+  
+  `);
+  console.log("\x1b[33m", "client request to delete a product by product id", "\x1b[00m");
+  console.log(`
+  
+  `);
   // delete one product by its `id` value
   try {
     const data = await Product.destroy(
@@ -162,7 +187,8 @@ router.delete('/:id', async (req, res) => {
         }
       }
     );
-    res.json(data);
+    res.header("Content-Type",'application/json');
+    res.send(JSON.stringify(data, null, 2));
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
