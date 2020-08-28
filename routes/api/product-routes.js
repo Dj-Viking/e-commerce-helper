@@ -5,6 +5,10 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // get all products
 router.get('/', async (req, res) => {
+  console.log(`
+  
+  `);
+  console.log("\x1b[33m", "client request for all products", "\x1b[00m");
   // find all products
   // be sure to include its associated Category and Tag data
   try {
@@ -20,7 +24,7 @@ router.get('/', async (req, res) => {
         }
       ]
     });
-    console.table(data[1]);
+    //console.table(data[1]);
     res.json(data);
   } catch (err) {
     console.log(err);
@@ -29,16 +33,51 @@ router.get('/', async (req, res) => {
 });
 
 // get one product
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
+  console.log(`
+  
+  `);
+  console.log("\x1b[33m", "client request for one product by product id", "\x1b[00m");
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
+  try {
+    const data = await Product.findOne(
+      {
+        where: {
+          id: req.params.id
+        }
+      },
+      {
+        include: [
+          {
+            model: Category,
+            attributes: ['category_name']
+          },
+          {
+            model: Tag,
+            attributes: ['tag_name']
+          }
+        ]
+      }
+    );
+    res.json(data);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 // create new product
 router.post('/', (req, res) => {
+  console.log(`
+  
+  `);
+  console.log("\x1b[33m", "client request to create a product", "\x1b[00m");
   /* req.body should look like this...
     {
       product_name: "Basketball",
+      //and also category_id!!
+      category_id: 4,
       price: 200.00,
       stock: 3,
       tagIds: [1, 2, 3, 4]
@@ -69,6 +108,16 @@ router.post('/', (req, res) => {
 // update product
 router.put('/:id', (req, res) => {
   // update product data
+    /* req.body should look like this...
+    {
+      product_name: "Basketball",
+      //and also category_id!!
+      category_id: 4,
+      price: 200.00,
+      stock: 3,
+      tagIds: [1, 2, 3, 4]
+    }
+  */
   Product.update(req.body, {
     where: {
       id: req.params.id,
@@ -103,13 +152,26 @@ router.put('/:id', (req, res) => {
     })
     .then((updatedProductTags) => res.json(updatedProductTags))
     .catch((err) => {
-      // console.log(err);
+      console.log(err);
       res.status(400).json(err);
     });
 });
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
+  try {
+    const data = await Product.destroy(
+      {
+        where: {
+          id: req.params.id
+        }
+      }
+    );
+    res.json(data);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;

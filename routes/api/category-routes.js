@@ -54,7 +54,9 @@ router.put('/:id', async (req, res) => {
   // update a category by its `id` value
   try {
     const data = await Category.update(
-      req.body,
+      {
+        category_name: req.body.category_name
+      },
       {
         individualHooks: true,
         where: {
@@ -86,7 +88,6 @@ router.delete('/:id', async (req, res) => {
     console.log(err);
     res.status(500).json(err);
   }
-  
 });
 
 module.exports = router;
