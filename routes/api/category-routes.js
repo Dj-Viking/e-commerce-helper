@@ -26,6 +26,7 @@ router.get('/', async (req, res) => {
     );
     res.header("Content-Type",'application/json');
     res.send(JSON.stringify(data, null, 2));
+    // res.json(data); //this is not formatted if using curl. Insomnia Core will format it for you
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -115,6 +116,7 @@ router.put('/:id', async (req, res) => {
     }
     res.header("Content-Type",'application/json');
     res.send(JSON.stringify(data, null, 2));
+    // res.json(data);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
