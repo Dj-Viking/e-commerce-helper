@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Category, Product } = require('../../models');
+const sequelize = require('../../config/connection.js');
 
 // The `/api/categories` endpoint
 
@@ -29,12 +30,12 @@ router.get('/:id', async (req, res) => {
   try {
     const data = await Category.findOne(
       {
+        where: {
+          id: req.params.id
+        },//catching which category we're looking at and then JOIN the product model 
         include: [
           {
             model: Product,
-            where: {
-              id: req.params.id
-            }//keeping this as standard, below all the model inclusions no matter how many there are
           }
         ]
       }

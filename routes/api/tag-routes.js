@@ -29,12 +29,12 @@ router.get('/:id', async (req, res) => {
   try {
     const data = await Tag.findOne(
       {
+        where: {
+          id: req.params.id
+        },
         include: [
           {
             model: Product,
-            where: {
-              id: req.params.id
-            }
           }
         ]
       }
@@ -48,8 +48,19 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   // create a new tag
+  /** body required for the tag post route
+   * {
+   *  "tag_name": "name"
+   * }
+   * i think..but lets try
+   */
   try {
-
+    const data = await Tag.create(
+      {
+        tag_name: req.body.tag_name
+      }
+    );
+    res.json(data);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

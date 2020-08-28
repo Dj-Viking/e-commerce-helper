@@ -16,7 +16,6 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: Category
-          //attributes: ['category_name'],
         },
         {
           model: Tag
@@ -43,17 +42,15 @@ router.get('/:id', async (req, res) => {
     const data = await Product.findOne(
 
       {
+        where: {
+          id: req.params.id
+        },
         include: [
           {
             model: Category
           },
           {
-            model: Tag,
-            where: {
-              id: req.params.id
-            },//need this below both model inclusions so it knows which product needs to include which models
-            //establish the models to include and then decide which product id we are looking at
-
+            model: Tag
           }  
         ]
       }
