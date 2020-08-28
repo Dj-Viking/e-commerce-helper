@@ -25,6 +25,9 @@
 * create the Classes for each model
   - updated the index.js for the model dir to have the correct relations between tables
 * create the api routes
+  - DONE product-routes.js
+  - DONE category-routes.js
+  - tag-routes.js
 
 ## Database Models
 * DONE Category
@@ -92,11 +95,11 @@
 * Make sure you set up foreign key relationships that match the column we created in the respective models.
 
 ## Fill Out the API Routes to Perform RESTful CRUD Operations
-* Fill out the unfinished routes in product-routes.js, tag-routes.js, and category-routes.js to perform create, read, update, and delete operations using your Sequelize models.
+* IN-PROGRESS Fill out the unfinished routes in product-routes.js, tag-routes.js, and category-routes.js to perform create, read, update, and delete operations using your Sequelize models.
 
 ## Seed the database
-* After creating the models and routes, run npm run seed to seed data to your database so that you can test your routes.
+* DONE After creating the models and routes, run npm run seed to seed data to your database so that you can test your routes.
 
 ## sync sequelize to db on server start
-* Create the code needed in server.js to sync the Sequelize models to the MySQL database on server start.
+* DONE Create the code needed in server.js to sync the Sequelize models to the MySQL database on server start.
 
