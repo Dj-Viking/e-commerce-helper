@@ -53,7 +53,7 @@ Back-end example solution which could connect to a front end code base for an e-
 ## Credits
 
 * Anders Ackerman
-* Xandromus
+* [Xandromus](https://github.com/Xandromus)
 
 ## Contribute
 
