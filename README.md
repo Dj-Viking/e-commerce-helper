@@ -6,7 +6,7 @@
 
 ### Powered By 
 [![Node: JS](https://img.shields.io/badge/Node-JS-cfcc00.svg)](https://nodejs.org/en/) [![Express: JS](https://img.shields.io/badge/Express-JS-1b9e00.svg)](https://nodejs.org/en/)
-[![npm: mysql2](https://img.shields.io/badge/npm-mysql2-111AFF.svg)](https://github.com/sidorares/node-mysql2) [![npm: bcrypt](https://img.shields.io/badge/npm-bcrypt-6517D7.svg)](https://github.com/kelektiv/node.bcrypt.js)  [![npm: Sequelize](https://img.shields.io/badge/npm-Sequelize-00688a.svg)](https://github.com/sequelize/sequelize) [![Database: MySQL](https://img.shields.io/badge/Database-MySQL-111AFF.svg)](https://downloads.mysql.com/archives/community/) [![npm: dotenv](https://img.shields.io/badge/npm-dotenv-001a80.svg)](https://github.com/motdotla/dotenv) [![Operation: CRUDeholder](https://img.shields.io/badge/Operation-CRUD-red.svg)](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)
+[![npm: mysql2](https://img.shields.io/badge/npm-mysql2-111AFF.svg)](https://github.com/sidorares/node-mysql2) [![npm: Sequelize](https://img.shields.io/badge/npm-Sequelize-00688a.svg)](https://github.com/sequelize/sequelize) [![Database: MySQL](https://img.shields.io/badge/Database-MySQL-111AFF.svg)](https://downloads.mysql.com/archives/community/) [![npm: dotenv](https://img.shields.io/badge/npm-dotenv-001a80.svg)](https://github.com/motdotla/dotenv) [![Operation: CRUDeholder](https://img.shields.io/badge/Operation-CRUD-red.svg)](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)
 
 ## Description 
 
@@ -48,7 +48,7 @@ Back-end example solution which could connect to a front end code base for an e-
 ## Usage
 - video coming soon
 - Check out the walkthrough video here by clicking this badge! 👇
-* [![You: Tube](https://img.shields.io/badge/You-Tube-ff0000.svg)]()
+* [![You: Tube](https://img.shields.io/badge/You-Tube-ff0000.svg)](https://youtu.be/Pm9fKcak62s)
 
 ## Credits
 
