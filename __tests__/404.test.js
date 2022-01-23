@@ -1,15 +1,6 @@
 const TestServer = require("../TestServer");
 const request = require("supertest");
 const app = TestServer();
-const sequelize = require("../config/connection");
-
-beforeEach((done) => {
-  sequelize.authenticate().then(() => done());
-});
-
-afterEach((done) => {
-  sequelize.close().then(() => done())
-});
 
 describe("test 404 route", () => {
 

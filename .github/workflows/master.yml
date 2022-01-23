@@ -40,6 +40,8 @@ jobs:
           mysql user: ${{ secrets.DB_USER}} # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
           mysql password: ${{ secrets.DB_PASSWORD }} # Required if "mysql user" exists. The password for the "mysql user"
       # install packages
+      - name: Restart the mysql service
+        run: service mysql restart
       - name: install all packages with version from project's own package-lock.json
         run: |
           if [ -e yarn.lock ]; then
