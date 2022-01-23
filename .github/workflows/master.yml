@@ -28,7 +28,6 @@ jobs:
         with:
           node-version: 14.17.0
       # install mysql
-      - name: install MYSQL
       - uses: shogo82148/actions-setup-mysql@v1
         with: 
           distribution: 'mysql'
