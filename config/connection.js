@@ -10,7 +10,11 @@ const sequelize = process.env.JAWSDB_URL
       dialectOptions: {
         decimalNumbers: true,
       },
-      logging: process.env.NODE_ENV === "development"
+      // logging: () => {
+      //   if (process.env.NODE_ENV !== "test" || process.env.NODE_ENV !== "production") return true;
+      //   return false;
+      // }
+      logging: true
     });
 
 module.exports = sequelize;
