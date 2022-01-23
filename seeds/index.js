@@ -21,7 +21,7 @@ const seedAll = async () => {
     await seedProductTags();
     console.log('\n----- PRODUCT TAGS SEEDED -----\n');
   
-    process.exit(0);
+    process.env.NODE_ENV === "development" && process.exit(0);
 
   } catch (err) {
     console.log(err);

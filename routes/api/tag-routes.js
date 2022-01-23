@@ -4,13 +4,6 @@ const { Tag, Product, ProductTag } = require('../../models');
 // The `/api/tags` endpoint
 
 router.get('/', async (req, res) => {
-  console.log(`
-  
-  `);
-  console.log("\x1b[33m", "client request to get all tags", "\x1b[00m");
-  console.log(`
-  
-  `);
   // find all tags
   // be sure to include its associated Product data
   try {
@@ -32,13 +25,6 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  console.log(`
-  
-  `);
-  console.log("\x1b[33m", "client request to get one tag by id", "\x1b[00m");
-  console.log(`
-  
-  `);
   // find a single tag by its `id`
   // be sure to include its associated Product data
   try {
@@ -63,13 +49,6 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  console.log(`
-  
-  `);
-  console.log("\x1b[33m", "client request to create a tag", "\x1b[00m");
-  console.log(`
-  
-  `);
   // create a new tag
   /** body required for the tag post route
    * {
@@ -92,13 +71,6 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
-  console.log(`
-  
-  `);
-  console.log("\x1b[33m", "client request to update a tag by id", "\x1b[00m");
-  console.log(`
-  
-  `);
   // update a tag's name by its `id` value
     /** body required for the tag post route
    * {
@@ -127,13 +99,6 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-  console.log(`
-  
-  `);
-  console.log("\x1b[33m", "client request to delete a tag by id", "\x1b[00m");
-  console.log(`
-  
-  `);
   // delete on tag by its `id` value
   try {
     const data = await Tag.destroy(

@@ -5,13 +5,6 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // get all products
 router.get('/', async (req, res) => {
-  console.log(`
-  
-  `);
-  console.log("\x1b[33m", "client request for all products", "\x1b[00m");
-  console.log(`
-  
-  `);
   // find all products
   // be sure to include its associated Category and Tag data
   try {
@@ -36,13 +29,6 @@ router.get('/', async (req, res) => {
 
 // get one product
 router.get('/:id', async (req, res) => {
-  console.log(`
-  
-  `);
-  console.log("\x1b[33m", "client request for one product by product id", "\x1b[00m");
-  console.log(`
-  
-  `);
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
   try {
@@ -72,13 +58,6 @@ router.get('/:id', async (req, res) => {
 
 // create new product
 router.post('/', (req, res) => {
-  console.log(`
-  
-  `);
-  console.log("\x1b[33m", "client request to create a product", "\x1b[00m");
-  console.log(`
-  
-  `);
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -89,8 +68,10 @@ router.post('/', (req, res) => {
       tagIds: [1, 2, 3, 4]
     }
   */
+  let createdProd;
   Product.create(req.body)
     .then((product) => {
+      createdProd = product;
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {
         const productTagIdArr = req.body.tagIds.map((tag_id) => {
@@ -102,9 +83,15 @@ router.post('/', (req, res) => {
         return ProductTag.bulkCreate(productTagIdArr);
       }
       // if no product tags, just respond
-      res.status(200).json(product);
+      // UNREACHABLE
+      //res.status(200).json(product);
     })
-    .then((productTagIds) => res.status(200).json(productTagIds))
+    .then((productTagIds) => {
+      res.status(200).json({
+        product: createdProd,
+        productTags: productTagIds
+      })
+    })
     .catch((err) => {
       console.log(err);
       res.status(400).json(err);
@@ -113,13 +100,6 @@ router.post('/', (req, res) => {
 
 // update product
 router.put('/:id', (req, res) => {
-  console.log(`
-  
-  `);
-  console.log("\x1b[33m", "client request to update a product by product id", "\x1b[00m");
-  console.log(`
-  
-  `);
   // update product data
     /* req.body should look like this...
     {
@@ -171,13 +151,6 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-  console.log(`
-  
-  `);
-  console.log("\x1b[33m", "client request to delete a product by product id", "\x1b[00m");
-  console.log(`
-  
-  `);
   // delete one product by its `id` value
   try {
     const data = await Product.destroy(
