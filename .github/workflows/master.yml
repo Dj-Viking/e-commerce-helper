@@ -13,40 +13,40 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-  # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-  jobs:
-    # This workflow contains a single job called "build"
-    build:
-      # The type of runner that the job will run on
-      runs-on: ubuntu-latest
-      environment: Test
-      # Steps represent a sequence of tasks that will be executed as part of the job
-      steps:
-        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-        - uses: actions/checkout@v2
-        - uses: actions/setup-node@v1
-          with:
-            node-version: 14.17.0
-        # install mysql
-        - name: install MYSQL
-        - uses: shogo82148/actions-setup-mysql@v1
-          with: 
-            distribution: 'mysql'
-            mysql-version: '8.0'
-            root-password: ${{ secrets.ROOT_PASSWORD }}
-            user: ${{ secrets.DB_USER }}
-            password: ${{ secrets.DB_PASSWORD }}
-        # install packages
-        - name: install all packages with version from project's own package-lock.json
-          run: 
-            npm ci;
-        # Runs a set of commands using the runners shell
-        - name: Run automated tests
-          run: echo Running automated tests; npm run test:ci;
-          env: 
-            ENV_TXT: ${{ secrets.ENV_TXT }}
-        # Upload code coverage
-        - name: Upload coverage to Codecov
-          uses: codecov/codecov-action@v1
-          with:
-              token: ${{ secrets.CODECOV_TOKEN }}
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    environment: Test
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.17.0
+      # install mysql
+      - name: install MYSQL
+      - uses: shogo82148/actions-setup-mysql@v1
+        with: 
+          distribution: 'mysql'
+          mysql-version: '8.0'
+          root-password: ${{ secrets.ROOT_PASSWORD }}
+          user: ${{ secrets.DB_USER }}
+          password: ${{ secrets.DB_PASSWORD }}
+      # install packages
+      - name: install all packages with version from project's own package-lock.json
+        run: 
+          npm ci;
+      # Runs a set of commands using the runners shell
+      - name: Run automated tests
+        run: echo Running automated tests; npm run test:ci;
+        env: 
+          ENV_TXT: ${{ secrets.ENV_TXT }}
+      # Upload code coverage
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+            token: ${{ secrets.CODECOV_TOKEN }}
