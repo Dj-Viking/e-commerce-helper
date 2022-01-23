@@ -41,7 +41,14 @@ jobs:
           mysql password: ${{ secrets.DB_PASSWORD }} # Required if "mysql user" exists. The password for the "mysql user"
       # install packages
       - name: install all packages with version from project's own package-lock.json
-        run: npm ci;
+        run: |
+          if [ -e yarn.lock ]; then
+          yarn install --frozen-lockfile
+          elif [ -e package-lock.json ]; then
+          npm ci
+          else
+          npm i
+          fi
       # Runs a set of commands using the runners shell
       - name: Run automated tests
         run: echo Running automated tests; npm run test:ci;
