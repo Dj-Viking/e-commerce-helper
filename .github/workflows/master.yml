@@ -29,7 +29,11 @@ jobs:
           node-version: 14.17.0
       # install mysql
       - uses: shogo82148/actions-setup-mysql@v1
-        with: 
+        with:
+          environment:
+            root-password: ${{ secrets.ROOT_PASSWORD }}
+            user: ${{ secrets.DB_USER }}
+            password: ${{ secrets.DB_PASSWORD }}
           distribution: 'mysql'
           mysql-version: '8.0'
           root-password: ${{ secrets.ROOT_PASSWORD }}
