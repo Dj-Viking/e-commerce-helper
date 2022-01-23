@@ -2,9 +2,11 @@ const TestServer = require("../TestServer");
 const request = require("supertest");
 const app = TestServer();
 const sequelize = require("../config/connection");
+const seedAll = require("../seeds");
 
 beforeEach(async () => {
-  await sequelize.sync({ force: false });
+  await sequelize.sync({ force: true });
+  await seedAll();
 });
 
 afterAll(async () => {
@@ -32,8 +34,10 @@ describe("CRUD testing of product routes", () => {
       .post("/api/products")
       .send(product)
     const parsed = JSON.parse(createProduct.text);
-    console.log("parsed", parsed);
+
     expect(createProduct.status).toBe(200);
+
+    expect(parsed).toStrictEqual({"product": {"category_id": 1, "id": 8, "price": 200, "product_name": "Basketball", "stock": 3}, "productTags": [{"id": 15, "product_id": 8, "tag_id": 1}]})
   });
 
 });

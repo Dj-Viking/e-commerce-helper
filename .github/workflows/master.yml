@@ -27,6 +27,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.17.0
+      # Shutdown the Default MySQL, "sudo" is necessary, please do not remove it
+      - name: Shutdown Ubuntu MySQL (SUDO)
+        run: sudo service mysql stop 
       # install mysql
       - uses: mirromutth/mysql-action@v1.1
         with:

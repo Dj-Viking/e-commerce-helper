@@ -6,4 +6,4 @@
     * ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YOUR_NEW_PASSWORD_MATCHING_CRITERIA';
 
 
-* <a href="https://vin0d.medium.com/sequelize-mocking-with-jest-and-node-933c1f439579" rel="noopener noreferrer">JEST MOCK SEQUELIZE</a>
+<!-- * <a href="https://vin0d.medium.com/sequelize-mocking-with-jest-and-node-933c1f439579" rel="noopener noreferrer">JEST MOCK SEQUELIZE</a> -->
