@@ -58,7 +58,7 @@ jobs:
         env:
           DB_NAME: ecommerce_db
           DB_USER: root
-          DB_PASSWORD: ${{ secrets.DB_PW }}
+          DB_PW: ${{ secrets.DB_PW }}
       # Upload code coverage
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
