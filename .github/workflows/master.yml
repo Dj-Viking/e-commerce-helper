@@ -25,8 +25,9 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: test
-          DB_USER: root
-          DB_NAME: ecommerce_db
+          MYSQL_DATABASE: ecommerce_db
+          MYSQL_USER: root
+          MYSQL_PASSWORD: test
         ports:
             - 3306
         options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 10
@@ -38,6 +39,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.17.0
+      # Shutdown the Default MySQL, "sudo" is necessary, please do not remove it
+      - name: Shutdown Ubuntu MySQL (SUDO)
+        run: sudo service mysql stop 
+      - name: Start mysql??
+        run: sudo service mysql start
       - name: install all packages with version from project's own package-lock.json
         run: |
           if [ -e yarn.lock ]; then
