@@ -43,6 +43,8 @@ jobs:
         run: sudo service mysql stop 
       - name: Start mysql??
         run: sudo service mysql start
+      - name: Create Database
+        run: mysql -h 127.0.0.1 --port 3306 -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS test;'
       - name: install all packages with version from project's own package-lock.json
         run: |
           if [ -e yarn.lock ]; then
