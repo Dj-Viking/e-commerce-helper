@@ -25,9 +25,7 @@ const seedAll = async () => {
   
     process.env.NODE_ENV !== "test" && process.exit(0);
 
-  } catch (err) {
-    console.log(err);
-  }
+  } catch (err) {}
 };
 
 seedAll();
