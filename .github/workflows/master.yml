@@ -24,12 +24,12 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          ROOT_PASSWORD: ${{ secrets.ROOT_PASSWORD }}
+          MYSQL_ROOT_PASSWORD: test
           DB_USER: root
           DB_NAME: ${{ secrets.DB_NAME }}
         ports:
-            - '8888:3306'
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+            - 3306
+        options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 10
     environment: Test
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
