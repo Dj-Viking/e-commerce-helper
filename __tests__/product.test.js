@@ -10,11 +10,6 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-  // await sequelize.query("DROP TABLE IF EXISTS product_tag");
-  // await sequelize.query("DROP TABLE IF EXISTS tag");
-  // await sequelize.query("DROP TABLE IF EXISTS product");
-  // await sequelize.query("DROP TABLE IF EXISTS category");
-  // await sequelize.query("DROP TABLE IF EXISTS category");
   await sequelize.close();
 });
 

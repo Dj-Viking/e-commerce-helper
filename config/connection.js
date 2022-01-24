@@ -14,7 +14,7 @@ const sequelize = process.env.JAWSDB_URL
       //   if (process.env.NODE_ENV !== "test" || process.env.NODE_ENV !== "production") return true;
       //   return false;
       // }
-      logging: true
+      logging: false
     });
 
 module.exports = sequelize;
