@@ -1,4 +1,4 @@
-
+[![codecov](https://codecov.io/gh/Dj-Viking/e-commerce-helper/branch/master/graph/badge.svg?token=4CBU93P4L7)](https://codecov.io/gh/Dj-Viking/e-commerce-helper)
 
 # e-commerce-helper
 
