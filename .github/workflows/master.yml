@@ -26,7 +26,6 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: test
           MYSQL_DATABASE: ecommerce_db
-          MYSQL_USER: root
           MYSQL_PASSWORD: test
         ports:
             - 3306
