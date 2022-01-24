@@ -39,9 +39,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.17.0
-      # Shutdown the Default MySQL, "sudo" is necessary, please do not remove it
-      - name: Shutdown Ubuntu MySQL (SUDO)
-        run: sudo service mysql stop 
       - name: Start mysql??
         run: sudo service mysql start
       - name: Create Database
@@ -59,7 +56,7 @@ jobs:
       - name: Run automated tests
         run: echo Running automated tests; npm run test:ci;
         env:
-          DB_NAME: ecommerce_db
+          DB_NAME: test
           DB_USER: root
           DB_PW: test
       # Upload code coverage
