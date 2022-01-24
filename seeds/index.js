@@ -7,8 +7,10 @@ const sequelize = require('../config/connection');
 
 const seedAll = async () => {
   try {
-    process.env.NODE_ENV !== "test" && await sequelize.sync({ force: false });
-    console.log('\n----- DATABASE SYNCED -----\n');
+    if (process.env.NODE_ENV !== "test") {
+      await sequelize.sync({ force: false });
+      console.log('\n----- DATABASE SYNCED -----\n');
+    }
     await seedCategories();
     console.log('\n----- CATEGORIES SEEDED -----\n');
   

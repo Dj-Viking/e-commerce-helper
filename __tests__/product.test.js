@@ -37,7 +37,7 @@ describe("CRUD testing of product routes", () => {
 
     expect(createProduct.status).toBe(200);
 
-    expect(parsed).toStrictEqual({"product": {"category_id": 1, "id": 8, "price": 200, "product_name": "Basketball", "stock": 3}, "productTags": [{"id": 15, "product_id": 8, "tag_id": 1}]})
+    expect(parsed).toStrictEqual({"product": {"category_id": 1, "id": 6, "price": 200, "product_name": "Basketball", "stock": 3}, "productTags": [{"id": 13, "product_id": 6, "tag_id": 1}]})
   });
 
 });
