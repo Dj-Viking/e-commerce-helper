@@ -24,9 +24,9 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PW }}
+          MYSQL_ROOT_PASSWORD: test
           DB_USER: root
-          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_NAME: ecommerce_db
         ports:
             - 3306
         options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 10
@@ -38,11 +38,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.17.0
-      # Shutdown the Default MySQL, "sudo" is necessary, please do not remove it
-      - name: Shutdown Ubuntu MySQL (SUDO)
-        run: sudo service mysql stop 
-      - name: Start mysql??
-        run: sudo service mysql start
       - name: install all packages with version from project's own package-lock.json
         run: |
           if [ -e yarn.lock ]; then
@@ -58,7 +53,7 @@ jobs:
         env:
           DB_NAME: ecommerce_db
           DB_USER: root
-          DB_PW: ${{ secrets.DB_PW }}
+          DB_PW: test
       # Upload code coverage
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
