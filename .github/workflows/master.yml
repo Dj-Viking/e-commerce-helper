@@ -40,8 +40,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.17.0
-      - name: Start mysql??
-        run: sudo systemctl start mysql
       - name: Create Database
         run: mysql -h 127.0.0.1 --port 3306 -u root -ptest -e 'CREATE DATABASE IF NOT EXISTS test;'
       - name: install all packages with version from project's own package-lock.json
