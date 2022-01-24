@@ -15,7 +15,7 @@ afterAll(async () => {
 
 
 /**
- * product type
+ * product create return type
  * @type {{
  *   category_id: number;
  *   id: number;
@@ -61,7 +61,7 @@ describe("CRUD testing of product routes", () => {
 
   });
 
-  it("POST /products post a product without tagIds param", async () => {
+  it("POST /api/products post a product without tagIds param", async () => {
     const product = {
       product_name: "Basketball",
       category_id: 1,
@@ -74,21 +74,21 @@ describe("CRUD testing of product routes", () => {
     expect(createProduct.status).not.toBe(200);
   });
 
-  it("GET /products get all products", async () => {
+  it("GET /api/products get all products", async () => {
     const getAll = await request(app).get("/api/products");
     expect(getAll.status).toBe(200);
     const parsed = JSON.parse(getAll.text);
     expect(parsed).toHaveLength(6);
   });
 
-  it("GET /product/:id get a product by id", async () => {
+  it("GET /api/product/:id get a product by id", async () => {
     const getOne = await request(app).get(`/api/products/1`);
     expect(getOne.status).toBe(200);
     const parsed = JSON.parse(getOne.text);
     expect(parsed).toBeTruthy();
   });
 
-  it("PUT /product/:id update a product by id", async () => {
+  it("PUT /api/product/:id update a product by id", async () => {
     const updated = {
       product_name: "Basketball",
       category_id: 4,
@@ -102,7 +102,7 @@ describe("CRUD testing of product routes", () => {
     expect(parsed.updated).toBe(true)
   });
 
-  it("GET /product/:id check the updated product has a changed price", async () => {
+  it("GET /api/product/:id check the updated product has a changed price", async () => {
     const verify = await request(app).get("/api/products/1");
     expect(verify.status).toBe(200);
     const parsed = JSON.parse(verify.text);
@@ -111,7 +111,7 @@ describe("CRUD testing of product routes", () => {
 
   });
 
-  it("PUT /product/:id update a product by id with not valid id param", async () => {
+  it("PUT /api/product/:id update a product by id with not valid id param", async () => {
     const updated = {
       product_name: "Basketball",
       category_id: 4,
@@ -123,18 +123,18 @@ describe("CRUD testing of product routes", () => {
     expect(updateProduct.status).toBe(400);
   });
 
-  it("DELETE /product/:id delete a product by id", async () => {
+  it("DELETE /api/product/:id delete a product by id", async () => {
     const deleted = await request(app).delete("/api/products/1");
     expect(deleted.status).toBe(200);
   });
 
-  it("GET /product/:id check the product was deleted", async () => {
+  it("GET /api/product/:id check the product was deleted", async () => {
     const wasDeleted = await request(app).get("/api/products/1");
     expect(wasDeleted.status).toBe(404);
     expect(JSON.parse(wasDeleted.text).error).toBe("product not found");
   })
 
-  it("DELETE /product/:id delete a product by id with wrong id", async () => {
+  it("DELETE /api/product/:id delete a product by id with wrong id", async () => {
     const deleted = await request(app).delete("/api/products/kdjfkdjf");
     expect(deleted.status).toBe(500);
     expect(JSON.parse(deleted.text).error).toBe("need to provide an id")
