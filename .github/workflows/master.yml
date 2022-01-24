@@ -27,6 +27,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: test
           MYSQL_DATABASE: ecommerce_db
           MYSQL_PASSWORD: test
+          MYSQL_USER: test
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
         ports:
             - '3306:3306'
@@ -56,8 +57,8 @@ jobs:
       - name: Run automated tests
         run: echo Running automated tests; npm run test:ci;
         env:
-          DB_NAME: test
-          DB_USER: root
+          DB_NAME: ecommerce_db
+          DB_USER: test
           DB_PW: test
       # Upload code coverage
       - name: Upload coverage to Codecov
