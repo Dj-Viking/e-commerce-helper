@@ -5,13 +5,6 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // get all products
 router.get('/', async (req, res) => {
-  console.log(`
-  
-  `);
-  console.log("\x1b[33m", "client request for all products", "\x1b[00m");
-  console.log(`
-  
-  `);
   // find all products
   // be sure to include its associated Category and Tag data
   try {
@@ -28,21 +21,11 @@ router.get('/', async (req, res) => {
     //console.table(data[1]);
     res.header("Content-Type",'application/json');
     res.send(JSON.stringify(data, null, 2));
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
+  } catch (err) {}
 });
 
 // get one product
 router.get('/:id', async (req, res) => {
-  console.log(`
-  
-  `);
-  console.log("\x1b[33m", "client request for one product by product id", "\x1b[00m");
-  console.log(`
-  
-  `);
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
   try {
@@ -62,23 +45,15 @@ router.get('/:id', async (req, res) => {
         ]
       }
     );
+    if (data === null) return res.status(404).json({ error: "product not found"})
     res.header("Content-Type",'application/json');
     res.send(JSON.stringify(data, null, 2));
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
+  } catch (err) {}
 });
 
 // create new product
 router.post('/', (req, res) => {
-  console.log(`
   
-  `);
-  console.log("\x1b[33m", "client request to create a product", "\x1b[00m");
-  console.log(`
-  
-  `);
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -89,8 +64,11 @@ router.post('/', (req, res) => {
       tagIds: [1, 2, 3, 4]
     }
   */
+  let createdProd;
+  if (!req.body.tagIds) return res.status(400).json({ error: "need to provide tagIds in json body" });
   Product.create(req.body)
     .then((product) => {
+      createdProd = product;
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {
         const productTagIdArr = req.body.tagIds.map((tag_id) => {
@@ -102,24 +80,19 @@ router.post('/', (req, res) => {
         return ProductTag.bulkCreate(productTagIdArr);
       }
       // if no product tags, just respond
-      res.status(200).json(product);
+      // UNREACHABLE
+      //res.status(200).json(product);
     })
-    .then((productTagIds) => res.status(200).json(productTagIds))
-    .catch((err) => {
-      console.log(err);
-      res.status(400).json(err);
+    .then((productTagIds) => {
+      res.status(200).json({
+        product: createdProd,
+        productTags: productTagIds
+      })
     });
 });
 
 // update product
 router.put('/:id', (req, res) => {
-  console.log(`
-  
-  `);
-  console.log("\x1b[33m", "client request to update a product by product id", "\x1b[00m");
-  console.log(`
-  
-  `);
   // update product data
     /* req.body should look like this...
     {
@@ -131,16 +104,19 @@ router.put('/:id', (req, res) => {
       tagIds: [1, 2, 3, 4]
     }
   */
+  let updatedProd;
+  let updatedProdTags;
   Product.update(req.body, {
     where: {
       id: req.params.id,
     },
   })
     .then((product) => {
+      updatedProd = !!product;
       // find all associated tags from ProductTag
       return ProductTag.findAll({ where: { product_id: req.params.id } });
     })
-    .then((productTags) => {
+    .then(async (productTags) => {
       // get list of current tag_ids
       const productTagIds = productTags.map(({ tag_id }) => tag_id);
       // create filtered list of new tag_ids
@@ -158,28 +134,32 @@ router.put('/:id', (req, res) => {
         .map(({ id }) => id);
 
       // run both actions
-      return Promise.all([
+      const result = await Promise.all([
         ProductTag.destroy({ where: { id: productTagsToRemove } }),
         ProductTag.bulkCreate(newProductTags),
       ]);
+      return result;
     })
-    .then((updatedProductTags) => res.json(updatedProductTags))
+    .then((updatedProductTags) => res.status(200).json({
+      updated: updatedProd,
+      productTags: {
+        tagsDestroyed: updatedProductTags[0],
+        createResult: updatedProductTags[1]
+      }
+    }))
     .catch((err) => {
-      console.log(err);
       res.status(400).json(err);
     });
 });
 
 router.delete('/:id', async (req, res) => {
-  console.log(`
-  
-  `);
-  console.log("\x1b[33m", "client request to delete a product by product id", "\x1b[00m");
-  console.log(`
-  
-  `);
   // delete one product by its `id` value
   try {
+    if (!!req.params.id) {
+      if (isNaN(Number(req.params.id))){
+        throw new Error("need to provide an id");
+      }
+    }
     const data = await Product.destroy(
       {
         where: {
@@ -190,8 +170,7 @@ router.delete('/:id', async (req, res) => {
     res.header("Content-Type",'application/json');
     res.send(JSON.stringify(data, null, 2));
   } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
+    res.status(500).json({error: err.message});
   }
 });
 
